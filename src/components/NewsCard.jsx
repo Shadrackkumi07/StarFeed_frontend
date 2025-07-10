@@ -8,7 +8,7 @@ export default function NewsCard({ story }) {
   return (
     <div className="news-card">
       <div className="news-card__preview">
-        {/* Use a screenshot from wordpress service to get a preview image */}
+        
    <img
      src={`https://s.wordpress.com/mshots/v1/${encodeURIComponent(story.url)}?w=800`}
      alt={story.title}
