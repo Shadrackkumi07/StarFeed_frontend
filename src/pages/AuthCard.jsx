@@ -1,5 +1,5 @@
-// src/components/AuthCard.jsx for user login and sign up authentication
-import React, { useState } from 'react';
+// src/components/AuthCard.jsx
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth/AuthProvider';
 import '../styles/AuthCard.css';
@@ -13,6 +13,17 @@ export default function AuthCard() {
   const [error, setError]               = useState('');
   const [loading, setLoading]           = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [isMobile, setIsMobile]         = useState(window.innerWidth <= 600);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 600);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const logoStyle = isMobile
+    ? { position: 'absolute', top: '350px', left: '135px', width: '100px', height: '100px', zIndex: 10 }
+    : { position: 'absolute', top: '135px', left: '150px', width: '100px', height: '100px', zIndex: 10 };
 
   const handleToggle = () => {
     setError('');
@@ -42,12 +53,13 @@ export default function AuthCard() {
 
   return (
     <div className="wrapper min-h-screen flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/a.jpg')" }}>
-      {/* Logo in top left */}
+      {/* Logo (position changes based on screen size) */}
       <img
         src="/coshedule.png"
         alt="Logo"
-        style={{ position: 'absolute', top: '135px', left: '150px', width: '100px', height: '100px', zIndex: 10 }}
+        style={logoStyle}
       />
+
       <div className="card-switch bg-white/80 dark:bg-gray-900/90 rounded-3xl shadow-2xl p-8 backdrop-blur-md">
         <label className="switch">
           <input
@@ -58,9 +70,8 @@ export default function AuthCard() {
           />
           <span className="slider" />
           <div className="card-side" />
-
           <div className="flip-card__inner">
-            
+
             {/* LOGIN SIDE */}
             <div className="flip-card__front">
               <div className="title">Welcome Back</div>
