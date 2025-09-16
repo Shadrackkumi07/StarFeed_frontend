@@ -1,5 +1,6 @@
 StayFeed is a full-stack, server-rendered HackerNews client and community platform, built to showcase modern web-app patterns and deliver a polished user experience:
 https://play.google.com/store/apps/details?id=brackify.gg
+https://play.google.com/apps/testing/brackify.gg
 Backend (StayFeed-API)
 
 Node.js & Express proxy to the HackerNews Firebase API and Algolia search
